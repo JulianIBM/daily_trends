@@ -8,6 +8,4 @@ const feedSchema = mongoose.Schema({
   publisher: { type: String, required: true },
 });
 
-feedSchema.plugin(uniqueValidator);
-
 module.exports = mongoose.model("User", feedSchema);
