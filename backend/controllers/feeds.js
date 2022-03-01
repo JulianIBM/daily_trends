@@ -99,3 +99,16 @@ exports.deleteFeed = (req, res, next) => {
       });
     });
 };
+
+exports.deleteScrapedFeeds = (req, res, next) => {
+  console.log("Deleting scraped feeds");
+  Feed.deleteMany({ imagePath: /^https/ })
+    .then((result) => {
+      res.status(200).json({ message: "Feed deleted!" });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Fetching feeds failed",
+      });
+    });
+};
