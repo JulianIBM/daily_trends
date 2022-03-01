@@ -89,7 +89,7 @@ exports.getFeed = (req, res, next) => {
 };
 
 exports.deleteFeed = (req, res, next) => {
-  Feed.deleteOne()
+  Feed.deleteOne({_id: req.params.id})
     .then((result) => {
       res.status(200).json({ message: "Feed deleted!" });
     })
