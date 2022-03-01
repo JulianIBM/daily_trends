@@ -20,10 +20,6 @@ async function scrapeAll(browserInstance){
 
     return scrapedData;
 
-    // let err = null;
-
-    // cb(err, scrapedData);
-
 	}
 	catch(err){
 		console.log("Could not resolve the browser instance => ", err);

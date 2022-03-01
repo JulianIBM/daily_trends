@@ -41,31 +41,4 @@ app.use('/api/feeds', feedsRoutes);
 
 app.use('/api/scrap', scrapRoutes);
 
-// app.use('/api/scrap', (req, res, next) => {
-//   const browserObject = require('./browser');
-//   const scraperController = require('../middleware/scraper');
-
-
-//   //Start the browser and create a browser instance
-//   let browserInstance = browserObject.startBrowser();
-
-//   // Pass the browser instance to the scraper controller
-//   const scrapeall = scraperController.scrapeAll(browserInstance, (err, res));
-
-//   console.log(scrapeall);
-// });
-
-// app.post("/api/posts", (req, res, next) => {
-//   const post = new Post({
-//     title: req.body.title,
-//     content: req.body.content
-//   });
-//   post.save().then(createdPost => {
-//     res.status(201).json({
-//       message: "Post added successfully",
-//       postId: createdPost._id
-//     });
-//   });
-// });
-
 module.exports = app;

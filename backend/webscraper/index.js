@@ -1,11 +1,6 @@
 const browserObject = require('./browser');
 const scraperController = require('../middleware/scraper');
-const FeedController = require('../controllers/feeds');
 const Feed = require("../models/feed");
-var async = require('async');
-const {performance} = require('perf_hooks');
-
-
 
 
 // Pass the browser instance to the scraper controller
@@ -15,10 +10,6 @@ exports.getScrapedFeed = async (req, res, next) => {
   let browserInstance = await browserObject.startBrowser();
 
   const scraperData = await scraperController.scrapeAll(browserInstance);
-  const timing = performance.now()-t0;
-  console.log(timing);
-
-
 
   Feed.insertMany(scraperData)
   .then( () => {
