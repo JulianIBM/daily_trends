@@ -7,11 +7,8 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Feed } from './feed.model';
 
-
-
 const BACKEND_URL = environment.apiUrl + '/feeds/';
 const SCRAP_URL = environment.apiUrl + '/scrap/';
-
 
 @Injectable({ providedIn: 'root' })
 export class FeedsService {
@@ -118,9 +115,7 @@ export class FeedsService {
   }
 
   updateScrapedFeeds() {
-    return this.http
-    .get<{ message: string }>(SCRAP_URL);
-
+    return this.http.get<{ message: string }>(SCRAP_URL);
   }
 
   deleteScrapedFeeds() {

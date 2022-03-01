@@ -1,11 +1,10 @@
-const express = require('express');
+const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
 
 const feedsRoutes = require("./routes/feeds");
 const scrapRoutes = require("./routes/scrap");
-
 
 const app = express();
 
@@ -37,8 +36,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/feeds', feedsRoutes);
+app.use("/api/feeds", feedsRoutes);
 
-app.use('/api/scrap', scrapRoutes);
+app.use("/api/scrap", scrapRoutes);
 
 module.exports = app;

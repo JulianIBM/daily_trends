@@ -7,22 +7,24 @@ exports.createFeed = (req, res, next) => {
     body: req.body.body,
     imagePath: url + "/images/" + req.file.filename,
     source: req.body.source,
-    publisher: req.body.publisher
+    publisher: req.body.publisher,
   });
-  feed.save().then((createdFeed) => {
-    res.status(201).json({
-      message: "Feed added successfully",
-      feed: {
-        ...createdFeed,
-        id: createdFeed._id,
-      },
+  feed
+    .save()
+    .then((createdFeed) => {
+      res.status(201).json({
+        message: "Feed added successfully",
+        feed: {
+          ...createdFeed,
+          id: createdFeed._id,
+        },
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Creating a feed failed!",
+      });
     });
-  })
-  .catch((error) => {
-    res.status(500).json({
-      message: "Creating a feed failed!",
-    });
-  });
 };
 
 exports.updateFeed = (req, res, next) => {
@@ -42,12 +44,12 @@ exports.updateFeed = (req, res, next) => {
   Feed.updateOne(feed)
     .then((result) => {
       res.status(200).json({
-        message: "Update successful!"
+        message: "Update successful!",
       });
     })
     .catch((error) => {
       res.status(500).json({
-        message: "Couldn't update feed!"
+        message: "Couldn't update feed!",
       });
     });
 };
@@ -89,7 +91,7 @@ exports.getFeed = (req, res, next) => {
 };
 
 exports.deleteFeed = (req, res, next) => {
-  Feed.deleteOne({_id: req.params.id})
+  Feed.deleteOne({ _id: req.params.id })
     .then((result) => {
       res.status(200).json({ message: "Feed deleted!" });
     })

@@ -18,6 +18,4 @@ router.delete("/:id", FeedController.deleteFeed);
 
 router.delete("", FeedController.deleteScrapedFeeds);
 
-
-
 module.exports = router;

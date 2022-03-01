@@ -1,18 +1,16 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
-import { Feed } from "../feed.model";
-import { FeedsService } from "../feeds.service";
+import { Feed } from '../feed.model';
+import { FeedsService } from '../feeds.service';
 
 @Component({
-  selector: "app-feed-list",
-  templateUrl: "./feed-list.component.html",
-  styleUrls: ["./feed-list.component.css"]
+  selector: 'app-feed-list',
+  templateUrl: './feed-list.component.html',
+  styleUrls: ['./feed-list.component.css'],
 })
-
 export class FeedListComponent implements OnInit, OnDestroy {
-
   feeds: Feed[] = [];
   private feedsSub: Subscription;
   isLoading = false;
@@ -20,24 +18,17 @@ export class FeedListComponent implements OnInit, OnDestroy {
   constructor(public feedsService: FeedsService, private router: Router) {}
 
   ngOnInit() {
-    if(this.router.url === '/update') {
+    if (this.router.url === '/update') {
       this.isLoading = true;
-      this.feedsService.deleteScrapedFeeds().subscribe(
-        () => {
+      this.feedsService.deleteScrapedFeeds().subscribe(() => {});
 
-        }
-      );
-
-      this.feedsService.updateScrapedFeeds().subscribe( () => {
+      this.feedsService.updateScrapedFeeds().subscribe(() => {
         this.isLoading = false;
         this.router.navigate(['/']);
-      })
-
+      });
     } else {
       this.feedsService.getFeeds();
     }
-
-
 
     this.feedsSub = this.feedsService
       .getFeedsUpdateListener()
@@ -47,14 +38,12 @@ export class FeedListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(feedId: string) {
-    this.feedsService.deleteFeed(feedId).subscribe(
-      () => {
-        this.feedsService.getFeeds();
-      }
-    );
+    this.feedsService.deleteFeed(feedId).subscribe(() => {
+      this.feedsService.getFeeds();
+    });
   }
 
   ngOnDestroy() {
-      this.feedsSub.unsubscribe();
+    this.feedsSub.unsubscribe();
   }
 }

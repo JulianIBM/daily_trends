@@ -1,7 +1,6 @@
-const browserObject = require('./browser');
-const scraperController = require('../middleware/scraper');
+const browserObject = require("./browser");
+const scraperController = require("../middleware/scraper");
 const Feed = require("../models/feed");
-
 
 // Pass the browser instance to the scraper controller
 exports.getScrapedFeed = async (req, res, next) => {
@@ -12,14 +11,12 @@ exports.getScrapedFeed = async (req, res, next) => {
   const scraperData = await scraperController.scrapeAll(browserInstance);
 
   Feed.insertMany(scraperData)
-  .then( () => {
-    return res.status(200).json({ message: "Feeds inserted" });
-  })
-  .catch( () => {
-    return res.status(500).json({
-      message: "Error"
+    .then(() => {
+      return res.status(200).json({ message: "Feeds inserted" });
+    })
+    .catch(() => {
+      return res.status(500).json({
+        message: "Error",
+      });
     });
-  });
-
-}
-
+};
